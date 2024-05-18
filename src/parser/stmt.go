@@ -45,6 +45,8 @@ func parse_var_decl_stmt(p *parser) ast.Stmt {
 
 	p.expect(lexer.SEMICOLON)
 
+	p.sprite.Vars = append(p.sprite.Vars, varName)
+
 	return ast.VarDeclStmt{
 		IsConstant:    isConstant,
 		VariableName:  varName,

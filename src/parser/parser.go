@@ -15,6 +15,7 @@ type parser struct {
 	lexer  *lexer.Lexer
 	errors []string
 	pos    int
+	sprite *ast.Sprite
 }
 
 func createParser(lexer *lexer.Lexer) *parser {
@@ -25,17 +26,29 @@ func createParser(lexer *lexer.Lexer) *parser {
 	}
 }
 
-func Parse(lexer *lexer.Lexer) (ast.File, []string) {
+func Parse(spriteName string, lex *lexer.Lexer) (ast.Sprite, []string) {
 	Body := make([]ast.Stmt, 0)
-	p := createParser(lexer)
+	p := createParser(lex)
+
+	p.expectError(lexer.COSTUME, "File must start with costume declaration")
+	costumePath := p.expectError(lexer.STRING, "Costume missing a file path").Value
+	p.expect(lexer.SEMICOLON)
+
+	var costumes []string
+	costumes = append(costumes, costumePath)
+
+	p.sprite = &ast.Sprite{
+		Name:     spriteName,
+		Costumes: costumes,
+	}
 
 	for p.hasTokens() {
 		Body = append(Body, parse_stmt(p))
 	}
 
-	return ast.File{
-		Statements: Body,
-	}, p.errors
+	p.sprite.Body = Body
+
+	return *p.sprite, p.errors
 }
 
 func (p *parser) currentToken() lexer.Token {

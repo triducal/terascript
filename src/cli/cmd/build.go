@@ -6,6 +6,8 @@ package cmd
 import (
 	"log"
 	"os"
+	"terascript/src/ast"
+	"terascript/src/compiler"
 	"terascript/src/lexer"
 	"terascript/src/parser"
 
@@ -29,9 +31,25 @@ var runCmd = &cobra.Command{
 		source := string(bytes)
 		lex := lexer.Tokenize(source)
 
-		ast, _ := parser.Parse(lex)
+		var sprites = make(map[string]ast.Sprite, 0)
 
-		litter.Dump(ast)
+		sprite, _ := parser.Parse("Stage", lex)
+
+		sprites[sprite.Name] = sprite
+
+		project := ast.Project{
+			Sprites: sprites,
+		}
+
+		sb3 := compiler.Compile(project)
+		litter.Dump(sb3)
+
+		// jsonObj, err := json.Marshal(sb3)
+
+		// if err != nil {
+		// 	panic(err)
+		// }
+
 	},
 }
 

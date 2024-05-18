@@ -52,27 +52,29 @@ const (
 	PERCENT TokenKind = "PERCENT"
 
 	// RESERVED KEYWORDS
-	VAR    TokenKind = "VAR"
-	CONST  TokenKind = "CONST"
-	IMPORT TokenKind = "IMPORT"
-	FN     TokenKind = "FN"
-	IF     TokenKind = "IF"
-	ELSE   TokenKind = "ELSE"
-	ELIF   TokenKind = "ELIF"
-	FOR    TokenKind = "FOR"
-	EXPORT TokenKind = "EXPORT"
+	VAR     TokenKind = "VAR"
+	CONST   TokenKind = "CONST"
+	IMPORT  TokenKind = "IMPORT"
+	FN      TokenKind = "FN"
+	IF      TokenKind = "IF"
+	ELSE    TokenKind = "ELSE"
+	ELIF    TokenKind = "ELIF"
+	FOR     TokenKind = "FOR"
+	EXPORT  TokenKind = "EXPORT"
+	COSTUME TokenKind = "COSTUME"
 )
 
 var keywords map[string]TokenKind = map[string]TokenKind{
-	"var":    VAR,
-	"const":  CONST,
-	"import": IMPORT,
-	"fn":     FN,
-	"if":     IF,
-	"else":   ELSE,
-	"elif":   ELIF,
-	"for":    FOR,
-	"export": EXPORT,
+	"var":     VAR,
+	"const":   CONST,
+	"import":  IMPORT,
+	"fn":      FN,
+	"if":      IF,
+	"else":    ELSE,
+	"elif":    ELIF,
+	"for":     FOR,
+	"export":  EXPORT,
+	"costume": COSTUME,
 }
 
 type Token struct {

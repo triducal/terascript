@@ -1,7 +1,15 @@
 package ast
 
-type File struct {
-	Statements []Stmt
+type Project struct {
+	Sprites map[string]Sprite
+}
+
+type Sprite struct {
+	Name     string
+	Vars     []string
+	Lists    []string
+	Costumes []string
+	Body     []Stmt
 }
 
 type Stmt interface {
