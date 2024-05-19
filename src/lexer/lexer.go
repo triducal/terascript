@@ -120,7 +120,7 @@ func stringHandler(lex *Lexer, regex *regexp.Regexp) {
 	match := regex.FindStringIndex(lex.remainder())
 	stringLiteral := lex.remainder()[match[0]:match[1]]
 
-	lex.push(NewToken(STRING, stringLiteral, lex.pos))
+	lex.push(NewToken(STRING, stringLiteral[1:len(stringLiteral)-1], lex.pos))
 	lex.advanceN(len(stringLiteral))
 }
 

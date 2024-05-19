@@ -11,7 +11,6 @@ import (
 	"terascript/src/lexer"
 	"terascript/src/parser"
 
-	"github.com/sanity-io/litter"
 	"github.com/spf13/cobra"
 )
 
@@ -41,14 +40,7 @@ var runCmd = &cobra.Command{
 			Sprites: sprites,
 		}
 
-		sb3 := compiler.Compile(project)
-		litter.Dump(sb3)
-
-		// jsonObj, err := json.Marshal(sb3)
-
-		// if err != nil {
-		// 	panic(err)
-		// }
+		compiler.Compile(project)
 
 	},
 }
